@@ -39,7 +39,7 @@ setup(
     cmdclass=versioneer.get_cmdclass(),
     packages=find_packages(),
     package_data={
-        'pyannote.db.etape': [
+        'Etape': [
             'data/*',
         ],
     },
