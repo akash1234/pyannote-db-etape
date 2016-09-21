@@ -61,12 +61,11 @@ class EtapeSpeakerDiarizationProtocol(SpeakerDiarizationProtocol):
         for uri in sorted(uems.uris):
             annotated = uems(uri)
             annotation = mdtms(uri)
-            yield {'uri': uri,
-                   'annotated': annotated,
-                   'annotation': annotation}
-
-    def get_wav(self, uri, wav_dir):
-        return op.join(wav_dir, uri, '.wav')
+            current_file = {
+                'uri': uri,
+                'annotated': annotated,
+                'annotation': annotation}
+            yield current_file
 
 
 class TV(EtapeSpeakerDiarizationProtocol):
@@ -132,8 +131,8 @@ Website
 http://www.afcp-parole.org/etape-en.html
     """
 
-    def __init__(self):
-        super(Etape, self).__init__()
+    def __init__(self, **kwargs):
+        super(Etape, self).__init__(**kwargs)
 
         self.register_protocol(
             'SpeakerDiarization', 'TV', TV)
