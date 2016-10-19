@@ -1,4 +1,4 @@
-### Version 0.2.2 (2016-10-19)
+### Version 0.2.3 (2016-10-19)
 
 - feat: add "Debug" speaker diarization protocol
 
