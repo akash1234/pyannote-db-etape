@@ -1,3 +1,7 @@
+### Version 0.2.2 (2016-10-19)
+
+- feat: add "Debug" speaker diarization protocol
+
 ### Version 0.2.1 (2016-09-22)
 
 - chore: update to pyannote.database 0.3

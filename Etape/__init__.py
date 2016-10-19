@@ -107,6 +107,20 @@ class Full(EtapeSpeakerDiarizationProtocol):
         return self._subset('all', 'tst')
 
 
+class Debug(EtapeSpeakerDiarizationProtocol):
+    """Speaker diarization protocol using ETAPE meant for debugging"""
+
+    def trn_iter(self):
+        return self._subset('debug', 'trn')
+
+    def dev_iter(self):
+        return self._subset('debug', 'dev')
+
+    def tst_iter(self):
+        return self._subset('debug', 'tst')
+
+
+
 class Etape(Database):
     """ETAPE corpus
 
@@ -142,3 +156,6 @@ http://www.afcp-parole.org/etape-en.html
 
         self.register_protocol(
             'SpeakerDiarization', 'Full', Full)
+
+        self.register_protocol(
+            'SpeakerDiarization', 'Debug', Debug)
