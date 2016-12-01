@@ -39,9 +39,22 @@ import os.path as op
 
 
 class EtapeSpeakerDiarizationProtocol(SpeakerDiarizationProtocol):
+    """Base speaker diarization protocol for ETAPE database
 
-    def __init__(self, **kwargs):
-        super(EtapeSpeakerDiarizationProtocol, self).__init__(**kwargs)
+    This class should be inherited from, not used directly.
+
+    Parameters
+    ----------
+    preprocessors : dict or (key, preprocessor) iterable
+        When provided, each protocol item (dictionary) are preprocessed, such
+        that item[key] = preprocessor(**item). In case 'preprocessor' is not
+        callable, it should be a string containing placeholder for item keys
+        (e.g. {'wav': '/path/to/{uri}.wav'})
+    """
+
+    def __init__(self, preprocessors={}, **kwargs):
+        super(EtapeSpeakerDiarizationProtocol, self).__init__(
+            preprocessors=preprocessors, **kwargs)
         self.uem_parser_ = UEMParser()
         self.mdtm_parser_ = MDTMParser()
 
@@ -69,7 +82,16 @@ class EtapeSpeakerDiarizationProtocol(SpeakerDiarizationProtocol):
 
 
 class TV(EtapeSpeakerDiarizationProtocol):
-    """Speaker diarization protocol using TV subset of ETAPE"""
+    """Speaker diarization protocol using TV subset of ETAPE database
+
+    Parameters
+    ----------
+    preprocessors : dict or (key, preprocessor) iterable
+        When provided, each protocol item (dictionary) are preprocessed, such
+        that item[key] = preprocessor(**item). In case 'preprocessor' is not
+        callable, it should be a string containing placeholder for item keys
+        (e.g. {'wav': '/path/to/{uri}.wav'})
+    """
 
     def trn_iter(self):
         return self._subset('tv', 'trn')
@@ -82,7 +104,16 @@ class TV(EtapeSpeakerDiarizationProtocol):
 
 
 class Radio(EtapeSpeakerDiarizationProtocol):
-    """Speaker diarization protocol using radio subset of ETAPE"""
+    """Speaker diarization protocol using radio subset of ETAPE
+
+    Parameters
+    ----------
+    preprocessors : dict or (key, preprocessor) iterable
+        When provided, each protocol item (dictionary) are preprocessed, such
+        that item[key] = preprocessor(**item). In case 'preprocessor' is not
+        callable, it should be a string containing placeholder for item keys
+        (e.g. {'wav': '/path/to/{uri}.wav'})
+    """
 
     def trn_iter(self):
         return self._subset('radio', 'trn')
@@ -95,7 +126,16 @@ class Radio(EtapeSpeakerDiarizationProtocol):
 
 
 class Full(EtapeSpeakerDiarizationProtocol):
-    """Speaker diarization protocol using ETAPE"""
+    """Speaker diarization protocol using ETAPE
+
+    Parameters
+    ----------
+    preprocessors : dict or (key, preprocessor) iterable
+        When provided, each protocol item (dictionary) are preprocessed, such
+        that item[key] = preprocessor(**item). In case 'preprocessor' is not
+        callable, it should be a string containing placeholder for item keys
+        (e.g. {'wav': '/path/to/{uri}.wav'})
+    """
 
     def trn_iter(self):
         return self._subset('all', 'trn')
@@ -108,7 +148,16 @@ class Full(EtapeSpeakerDiarizationProtocol):
 
 
 class Debug(EtapeSpeakerDiarizationProtocol):
-    """Speaker diarization protocol using ETAPE meant for debugging"""
+    """Speaker diarization protocol using ETAPE meant for debugging
+
+    Parameters
+    ----------
+    preprocessors : dict or (key, preprocessor) iterable
+        When provided, each protocol item (dictionary) are preprocessed, such
+        that item[key] = preprocessor(**item). In case 'preprocessor' is not
+        callable, it should be a string containing placeholder for item keys
+        (e.g. {'wav': '/path/to/{uri}.wav'})
+    """
 
     def trn_iter(self):
         return self._subset('debug', 'trn')
@@ -123,6 +172,14 @@ class Debug(EtapeSpeakerDiarizationProtocol):
 
 class Etape(Database):
     """ETAPE corpus
+
+Parameters
+----------
+preprocessors : dict or (key, preprocessor) iterable
+    When provided, each protocol item (dictionary) are preprocessed, such
+    that item[key] = preprocessor(**item). In case 'preprocessor' is not
+    callable, it should be a string containing placeholder for item keys
+    (e.g. {'wav': '/path/to/{uri}.wav'})
 
 Reference
 ---------
@@ -145,8 +202,8 @@ Website
 http://www.afcp-parole.org/etape-en.html
     """
 
-    def __init__(self, **kwargs):
-        super(Etape, self).__init__(**kwargs)
+    def __init__(self, preprocessors={}, **kwargs):
+        super(Etape, self).__init__(preprocessors=preprocessors, **kwargs)
 
         self.register_protocol(
             'SpeakerDiarization', 'TV', TV)
