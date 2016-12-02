@@ -75,6 +75,7 @@ class EtapeSpeakerDiarizationProtocol(SpeakerDiarizationProtocol):
             annotated = uems(uri)
             annotation = mdtms(uri)
             current_file = {
+                'database': 'Etape',
                 'uri': uri,
                 'annotated': annotated,
                 'annotation': annotation}
