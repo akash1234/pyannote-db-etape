@@ -1,6 +1,10 @@
+### Version 0.4 (2016-12-02)
+
+  - chore: update to pyannote.database 0.6 
+
 ### Version 0.3 (2016-12-01)
 
-  - chore: update to pyannote.database 0.5 
+  - chore: update to pyannote.database 0.5
 
 ### Version 0.2.3 (2016-10-19)
 
